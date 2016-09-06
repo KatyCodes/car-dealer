@@ -14,18 +14,20 @@
         $this->image = $car_image;
       }
 
-      function worthBuying($max_price)
+      function worthBuying($max_price, $max_miles)
       {
-          return $this->price < $max_price;
+        if ($this->price < $max_price && $this->miles < $max_miles){
+            return $this;
+        }
       }
       function getMiles()
       {
           return $this->miles;
       }
-      // function setMiles($numberOfMiles)
-      // {
-      //     $this->miles = $numberOfMiles;
-      // }
+      function setMiles($numberOfMiles)
+      {
+          $this->miles = $numberOfMiles;
+      }
     }
 
     $porsche = new Car("2014 Porsche 911", 114991, 7864, "img/porsche.jpg");
@@ -37,7 +39,7 @@
 
     $car_matching_search = array();
     foreach ($cars as $car) {
-        if ($car->worthBuying($_GET['price'])) {
+        if ($car->worthBuying($_GET['price'], $_GET['miles'])) {
             array_push($car_matching_search, $car);
         }
     }
@@ -52,6 +54,10 @@
       <h1>Your Car Dealership</h1>
       <ul>
         <?php
+        if (empty($car_matching_search)) {
+          echo "Your car search did not return any results. Get more money!";
+        }
+        else {
             foreach ($car_matching_search as $car) {
               $showMiles = $car->getMiles();
               echo "<li> $car->make_model </li>";
@@ -61,6 +67,7 @@
                   echo "<img src='$car->image'>";
               echo "</ul>";
             }
+          }
         ?>
       </ul>
 
