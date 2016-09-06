@@ -30,7 +30,7 @@
       }
     }
 
-    $porsche = new Car("2014 Porsche 911", 114991, 7864, "img/porsche.jpg");
+    $porsche = new Car("2014 Porsche 911", 114991, 7864, "../img/porsche.jpg");
     $ford = new Car("2011 Ford F450", 55995, 14241);
     $lexus = new Car("2013 Lexus RX 350", 44700, 20000);
     $mercedes = new Car("Mercedes Benz CLS550", 39900, 37979);
@@ -43,6 +43,7 @@
             array_push($car_matching_search, $car);
         }
     }
+
  ?>
 
 <!DOCTYPE html>
@@ -54,20 +55,20 @@
       <h1>Your Car Dealership</h1>
       <ul>
         <?php
-        if (empty($car_matching_search)) {
-          echo "Your car search did not return any results. Get more money!";
-        }
-        else {
-            foreach ($car_matching_search as $car) {
-              $showMiles = $car->getMiles();
-              echo "<li> $car->make_model </li>";
-              echo "<ul>";
-                  echo "<li> $$car->price </li>";
-                  echo "<li> Miles: $showMiles </li>";
-                  echo "<img src='$car->image'>";
-              echo "</ul>";
+            if (empty($car_matching_search)) {
+              echo "Your car search did not return any results. Get more money!";
             }
-          }
+            else {
+                foreach ($car_matching_search as $car) {
+                  $showMiles = $car->getMiles();
+                  echo "<li> $car->make_model </li>";
+                  echo "<ul>";
+                      echo "<li> $$car->price </li>";
+                      echo "<li> Miles: $showMiles </li>";
+                      echo "<img src='$car->image'>";
+                  echo "</ul>";
+                }
+              }
         ?>
       </ul>
 
